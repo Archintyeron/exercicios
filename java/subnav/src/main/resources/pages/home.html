@@ -1,9 +1,35 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Submarine Navigation</title>
+		<script>
+			function readPosition() {
+				var xhttp = new XMLHttpRequest();
+				
+				xhttp.onreadystatechange = function() {
+				    if (this.readyState == 4 && this.status == 200) {
+				      	document.getElementById("resultLabel").innerHTML =
+				      	this.responseText;
+				    }
+			  	};
+			  	
+			  	xhttp.open("GET", "/position", true);
+			    xhttp.send();
+			}
+		</script>
 	</head>
 	
 	<body>
-		<h1>Hello !</h1>
+		<form method="post" action="/move">
+			Position starts at 0 0 0 NORTE and is persistent.
+			<br />
+			<input type="text" name="actions" />
+			<input type="submit" />
+		</form>
+		<br />
+		<br />
+		<form method="post" action="/reset">
+			<input type="submit" value="Reset" />
+		</form>
 	</body>
 </html>
